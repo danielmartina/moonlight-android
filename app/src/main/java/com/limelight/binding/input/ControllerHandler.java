@@ -43,7 +43,6 @@ import com.limelight.nvstream.input.ControllerPacket;
 import com.limelight.nvstream.input.MouseButtonPacket;
 import com.limelight.nvstream.jni.MoonBridge;
 import com.limelight.preferences.PreferenceConfiguration;
-import com.limelight.ui.GameGestures;
 import com.limelight.utils.Vector2d;
 
 import org.cgutman.shieldcontrollerextensions.SceChargingState;
@@ -113,7 +112,6 @@ public class ControllerHandler implements InputManager.InputDeviceListener, UsbD
     private final Activity activityContext;
     private final double stickDeadzone;
     private final InputDeviceContext defaultContext = new InputDeviceContext();
-    private final GameGestures gestures;
     private final InputManager inputManager;
     private final Vibrator deviceVibrator;
     private final VibratorManager deviceVibratorManager;
@@ -128,10 +126,9 @@ public class ControllerHandler implements InputManager.InputDeviceListener, UsbD
     private final PreferenceConfiguration prefConfig;
     private short currentControllers, initialControllers;
 
-    public ControllerHandler(Activity activityContext, NvConnection conn, GameGestures gestures, PreferenceConfiguration prefConfig) {
+    public ControllerHandler(Activity activityContext, NvConnection conn, PreferenceConfiguration prefConfig) {
         this.activityContext = activityContext;
         this.conn = conn;
-        this.gestures = gestures;
         this.prefConfig = prefConfig;
         this.deviceVibrator = (Vibrator) activityContext.getSystemService(Context.VIBRATOR_SERVICE);
         this.deviceSensorManager = (SensorManager) activityContext.getSystemService(Context.SENSOR_SERVICE);

@@ -16,6 +16,7 @@ android {
 
         // Generate native debug symbols to allow Google Play to symbolicate our native crashes
         ndk.debugSymbolLevel = 'FULL'
+        signingConfig signingConfigs.debug
     }
 
     flavorDimensions.add("root")

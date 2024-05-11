@@ -243,27 +243,6 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         // allows proper touch splitting, which the OSC relies upon.
         View backgroundTouchView = findViewById(R.id.backgroundTouchView);
         backgroundTouchView.setOnTouchListener(this);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            // Request unbuffered input event dispatching for all input classes we handle here.
-            // Without this, input events are buffered to be delivered in lock-step with VBlank,
-            // artificially increasing input latency while streaming.
-            streamView.requestUnbufferedDispatch(
-                    InputDevice.SOURCE_CLASS_BUTTON | // Keyboards
-                    InputDevice.SOURCE_CLASS_JOYSTICK | // Gamepads
-                    InputDevice.SOURCE_CLASS_POINTER | // Touchscreens and mice (w/o pointer capture)
-                    InputDevice.SOURCE_CLASS_POSITION | // Touchpads
-                    InputDevice.SOURCE_CLASS_TRACKBALL // Mice (pointer capture)
-            );
-            backgroundTouchView.requestUnbufferedDispatch(
-                    InputDevice.SOURCE_CLASS_BUTTON | // Keyboards
-                    InputDevice.SOURCE_CLASS_JOYSTICK | // Gamepads
-                    InputDevice.SOURCE_CLASS_POINTER | // Touchscreens and mice (w/o pointer capture)
-                    InputDevice.SOURCE_CLASS_POSITION | // Touchpads
-                    InputDevice.SOURCE_CLASS_TRACKBALL // Mice (pointer capture)
-            );
-        }
-
         notificationOverlayView = findViewById(R.id.notificationOverlay);
 
         performanceOverlayView = findViewById(R.id.performanceOverlay);
@@ -2146,13 +2125,6 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View view, MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            // Tell the OS not to buffer input events for us
-            //
-            // NB: This is still needed even when we call the newer requestUnbufferedDispatch()!
-            view.requestUnbufferedDispatch(event);
-        }
-
         return handleMotionEvent(view, event);
     }
 

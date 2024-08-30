@@ -1491,6 +1491,19 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         inputManager.toggleSoftInput(0, 0);
     }
 
+    @Override
+    public boolean getTouchConfigState() {
+
+        return prefConfig.touchscreenMouse;
+    }
+
+    @Override
+    public void toggleTouch() {
+        LimeLog.info("Toggling touch mode");
+
+        prefConfig.touchscreenMouse = !prefConfig.touchscreenMouse;
+    }
+
     private byte getLiTouchTypeFromEvent(MotionEvent event) {
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:

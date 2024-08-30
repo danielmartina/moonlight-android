@@ -8,6 +8,7 @@ import com.limelight.binding.input.GameInputDevice;
 import com.limelight.binding.input.KeyboardTranslator;
 import com.limelight.nvstream.NvConnection;
 import com.limelight.nvstream.input.KeyboardPacket;
+import com.limelight.preferences.PreferenceConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -173,6 +174,10 @@ public class GameMenu {
         if (device != null) {
             options.addAll(device.getGameMenuOptions());
         }
+
+        options.add(new GameMenu.MenuOption(game.getTouchConfigState() ?
+                getString(R.string.game_menu_toggle_touch_on) : getString(R.string.game_menu_toggle_touch_off),
+                true, () -> game.toggleTouch()));
 
         options.add(new MenuOption(getString(R.string.game_menu_send_keys), () -> showSpecialKeysMenu()));
         options.add(new MenuOption(getString(R.string.game_menu_disconnect), () -> game.disconnect()));

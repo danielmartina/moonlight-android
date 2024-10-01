@@ -1664,12 +1664,6 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
     private boolean sendPenEventForPointer(View view, MotionEvent event, byte eventType, byte toolType, int pointerIndex) {
         byte penButtons = 0;
-        if ((event.getButtonState() & MotionEvent.BUTTON_STYLUS_PRIMARY) != 0) {
-            penButtons |= MoonBridge.LI_PEN_BUTTON_PRIMARY;
-        }
-        if ((event.getButtonState() & MotionEvent.BUTTON_STYLUS_SECONDARY) != 0) {
-            penButtons |= MoonBridge.LI_PEN_BUTTON_SECONDARY;
-        }
 
         byte tiltDegrees = MoonBridge.LI_TILT_UNKNOWN;
         InputDevice dev = event.getDevice();
